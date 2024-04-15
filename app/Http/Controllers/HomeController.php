@@ -23,10 +23,10 @@ class HomeController extends Controller
 
         if (auth()->attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('message', 'Login successful!');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->with('message', 'Login Failed');
     }
 
 

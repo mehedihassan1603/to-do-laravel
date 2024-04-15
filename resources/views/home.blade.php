@@ -25,19 +25,22 @@
         <a href="{{ route('create_student') }}">
             <button class="p-2 rounded-md text-lg bg-cyan-600 hover:bg-cyan-700">Create Student List</button>
         </a>
-        <a href="{{ route('view_student') }}">
-            <button class="p-2 rounded-md text-lg bg-cyan-600 hover:bg-cyan-700">View All Student</button>
-        </a>
-        <a href="{{ route('view_task') }}">
-            <button class="p-2 rounded-md text-lg bg-cyan-600 hover:bg-cyan-700">View All Task</button>
-        </a>
+        @auth
+            <a href="{{ route('view_task') }}">
+                <button class="p-2 rounded-md text-lg bg-cyan-600 hover:bg-cyan-700">View All Task</button>
+            </a>
+            <a href="{{ route('view_student') }}">
+                <button class="p-2 rounded-md text-lg bg-cyan-600 hover:bg-cyan-700">View All Student</button>
+            </a>
+        @endauth
     </div>
     <!-- Login and Register Buttons -->
     <div class="w-9/12 mx-auto mt-10 flex justify-center gap-5">
         @auth <!-- Check if user is authenticated -->
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="p-2 rounded-md text-lg bg-gray-800 text-white hover:bg-gray-700">Logout</button>
+                <button type="submit"
+                    class="p-2 rounded-md text-lg bg-gray-800 text-white hover:bg-gray-700">Logout</button>
             </form>
         @else
             <a href="{{ route('login') }}">
