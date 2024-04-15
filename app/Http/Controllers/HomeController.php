@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,10 +24,11 @@ class HomeController extends Controller
 
         if (auth()->attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended('/')->with('message', 'Login successful!');
+            Toastr::success('Your are Login to your account.', 'Login Successfull!', ["positionClass" => "toast-top-right"]);
+            return redirect()->intended('/');
         }
-
-        return back()->with('message', 'Login Failed');
+        Toastr::error('Enter email and password correctly.', 'Login Failed!', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
 
@@ -45,12 +47,13 @@ class HomeController extends Controller
             'email'=>$request->email,
             'password'=>Hash::make($request->password)
         ]);
-
-        return redirect()->route('index')->with('message', 'Registration successful! Please log in.');
+        Toastr::success('Registration successful! Please log in.', 'Success!', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('index');
     }
 
     public function Logout(){
         Auth::logout();
-        return redirect()->route('index')->with('message', 'You have been logged out.');
+        Toastr::success('You have been logged out.', 'Logout Successfully', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('index');
     }
 }

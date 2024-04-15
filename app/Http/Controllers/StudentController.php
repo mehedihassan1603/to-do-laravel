@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Students;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -29,7 +30,7 @@ class StudentController extends Controller
             'email' => $request->email,
             'gpa' => $request->gpa,
         ]);
-
+        Toastr::success('Student Information Added Successfully', 'Successfull!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('index')->with('message','Student Information Added Successfully');
     }
 
@@ -63,11 +64,13 @@ class StudentController extends Controller
             'email' => $request->email,
             'gpa' => $request->gpa,
         ]);
+        Toastr::success('Student Information Updated Successfully', 'Successfull!', ["positionClass" => "toast-top-right"]);
         return redirect()->route('index')->with('message','Student Information Updated Successfully');
     }
 
     public function DeleteStudent($id){
         Students::findOrFail($id)->delete();
+        Toastr::info('Student Deleted Successfully', 'Successfull!', ["positionClass"=> "toast-top-right","progressBar"=> true,"closeButton"=> true]);
         return redirect()->route('index')->with('message','Student Deleted Successfully');
     }
 }

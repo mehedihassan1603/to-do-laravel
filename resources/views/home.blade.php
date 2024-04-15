@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <title>To-Do Task</title>
     @vite('resources/css/app.css')
 </head>
@@ -13,11 +14,11 @@
     <h1 class="text-2xl p-6 w-9/12 mx-auto text-center text-white bg-green-600">
         This is my first Home page of to do task.
     </h1>
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
         <div class="bg-green-200 text-green-700 py-2 px-4 mb-4 rounded">
             {{ session()->get('message') }}
         </div>
-    @endif
+    @endif --}}
     <div class="w-9/12 mx-auto flex justify-center gap-10 mt-10">
         <a href="{{ route('create') }}">
             <button class="p-2 rounded-md text-lg bg-cyan-600 hover:bg-cyan-700">Create New Task</button>
@@ -51,6 +52,9 @@
             </a>
         @endauth
     </div>
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 </body>
 
 </html>
